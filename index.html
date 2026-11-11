@@ -95,8 +95,25 @@
     </footer>
 
     <div id="event-toast" class="hidden"></div>
+    <div id="error-overlay" class="hidden"></div>
   </div>
 
+  <script>
+    // Modül yükleme/runtime hatalarını ekrana bas
+    window.__showError = function (msg) {
+      var el = document.getElementById('error-overlay');
+      if (!el) return;
+      el.classList.remove('hidden');
+      el.innerHTML = '<h2>Çalışma Hatası</h2><div>Aşağıdaki hata nedeniyle sahne başlatılamadı. Konsolu da kontrol edin (F12).</div><pre></pre>';
+      el.querySelector('pre').textContent = String(msg);
+    };
+    window.addEventListener('error', function (e) {
+      window.__showError((e.message || 'Bilinmeyen hata') + (e.filename ? '\n' + e.filename + ':' + e.lineno : ''));
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      window.__showError((e.reason && e.reason.stack) || e.reason || 'Promise hatası');
+    });
+  </script>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

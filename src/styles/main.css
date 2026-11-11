@@ -564,6 +564,35 @@ input[type='range'] {
   background: #2d1517;
 }
 
+/* ---------- Error overlay ---------- */
+#error-overlay {
+  position: absolute;
+  inset: 52px 0 70px 0;
+  background: rgba(13, 17, 23, 0.96);
+  color: var(--text);
+  z-index: 50;
+  padding: 24px;
+  overflow: auto;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#error-overlay h2 {
+  color: var(--danger);
+  margin-bottom: 12px;
+  font-family: system-ui, sans-serif;
+}
+#error-overlay pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+  color: #ffb0b0;
+}
+
 /* ---------- Mobil ---------- */
 @media (max-width: 720px) {
   .brand h1 {

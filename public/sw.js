@@ -1,5 +1,5 @@
 /* Service Worker - GitHub Pages offline destek */
-const CACHE = 'motor-sim-v1';
+const CACHE = 'motor-sim-v2';
 const ASSETS = ['./', './index.html', './manifest.json', './icons/icon.svg'];
 
 self.addEventListener('install', (event) => {
