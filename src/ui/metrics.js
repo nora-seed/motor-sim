@@ -43,7 +43,8 @@ export class MetricsPanel {
     set('m-vib', `${Math.round(snap.vibration * 100)}<span class="metric-unit"> %</span>`);
     set('m-temp', `${snap.temperature.toFixed(0)}<span class="metric-unit"> °C</span>`);
     set('m-boost', `${snap.boost.toFixed(2)}<span class="metric-unit"> bar</span>`);
-    set('m-fuel', `${snap.fuelRate.toFixed(1)}<span class="metric-unit"> L/h</span>`);
+    const fuel = typeof snap.fuelRate === 'number' ? snap.fuelRate : 0;
+    set('m-fuel', `${fuel.toFixed(1)}<span class="metric-unit"> L/h</span>`);
 
     const faultCount = snap.faults.length;
     const faultEl = document.querySelector('#m-faults .metric-value');

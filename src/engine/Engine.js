@@ -481,6 +481,9 @@ export class Engine {
       layout: this.layout,
       firingOrder: this.firingOrder,
       rpmLimit: this.rpmLimit,
+      fuelRate: this.fuelRate,
+      time: this.time,
+      targetRpm: this.targetRpm,
     };
   }
 }
