@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1117" />
+  <meta name="description" content="6 silindirli araba motoru simülasyonu - parça değiştirin, olayları izleyin" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <title>6 Silindir Motor Simülasyonu</title>
+</head>
+<body>
+  <div id="app">
+    <canvas id="scene"></canvas>
+
+    <header id="topbar">
+      <div class="brand">
+        <span class="brand-icon">⚙</span>
+        <h1>6 Silindir Motor Simülasyonu</h1>
+      </div>
+      <div id="engine-status">
+        <span id="status-dot" class="dot off"></span>
+        <span id="status-text">Durduruldu</span>
+      </div>
+      <div class="top-actions">
+        <button id="btn-install" class="btn ghost hidden">Yükle</button>
+        <button id="btn-sound" class="btn ghost" title="Ses aç/kapat">🔊</button>
+        <button id="btn-cutaway" class="btn ghost" title="Kesit görünümü">Kesit</button>
+        <button id="btn-panel" class="btn ghost" title="Paneli aç/kapat">☰</button>
+      </div>
+    </header>
+
+    <aside id="panel" class="open">
+      <nav id="tabs">
+        <button class="tab active" data-tab="parts">Parçalar</button>
+        <button class="tab" data-tab="metrics">Ölçüler</button>
+        <button class="tab" data-tab="log">Olay Günlüğü</button>
+        <button class="tab" data-tab="tests">Testler</button>
+      </nav>
+
+      <section id="tab-parts" class="tab-content active">
+        <div class="field">
+          <label>Silindir düzeni</label>
+          <div class="segmented" id="layout-switch">
+            <button data-layout="inline6" class="active">Sıralı 6</button>
+            <button data-layout="v6">V6</button>
+          </div>
+        </div>
+        <div id="parts-container"></div>
+      </section>
+
+      <section id="tab-metrics" class="tab-content">
+        <div id="metrics-container"></div>
+        <div id="power-chart-wrap">
+          <canvas id="power-chart" width="320" height="140"></canvas>
+        </div>
+        <div id="timing-wrap">
+          <h3>Ateşleme &amp; Supap Zamanlaması</h3>
+          <canvas id="timing-chart" width="320" height="180"></canvas>
+        </div>
+      </section>
+
+      <section id="tab-log" class="tab-content">
+        <div class="log-actions">
+          <button id="btn-clear-log" class="btn small">Temizle</button>
+        </div>
+        <div id="log-container"></div>
+      </section>
+
+      <section id="tab-tests" class="tab-content">
+        <div id="tests-container"></div>
+        <div class="field rpm-field">
+          <label>Manuel RPM: <span id="rpm-value">800</span></label>
+          <input type="range" id="rpm-slider" min="200" max="7500" step="50" value="800" />
+        </div>
+        <div class="field">
+          <label>Gaz: <span id="throttle-value">0%</span></label>
+          <input type="range" id="throttle-slider" min="0" max="100" step="1" value="0" />
+        </div>
+        <div class="btn-row">
+          <button id="btn-start" class="btn primary">▶ Çalıştır</button>
+          <button id="btn-stop" class="btn">■ Durdur</button>
+        </div>
+      </section>
+    </aside>
+
+    <footer id="hud">
+      <div class="hud-item"><span class="hud-label">RPM</span><span id="hud-rpm" class="hud-value">0</span></div>
+      <div class="hud-item"><span class="hud-label">Tork</span><span id="hud-torque" class="hud-value">0 Nm</span></div>
+      <div class="hud-item"><span class="hud-label">Güç</span><span id="hud-power" class="hud-value">0 hp</span></div>
+      <div class="hud-item"><span class="hud-label">Titreşim</span><span id="hud-vib" class="hud-value">0%</span></div>
+      <div class="hud-item"><span class="hud-label">Sıcaklık</span><span id="hud-temp" class="hud-value">20°C</span></div>
+      <div class="hud-item"><span class="hud-label">Boost</span><span id="hud-boost" class="hud-value">0.0 bar</span></div>
+    </footer>
+
+    <div id="event-toast" class="hidden"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
